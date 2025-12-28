@@ -8,7 +8,8 @@ quotes = [
     "Premature optimization is the root of all evil.",
     "First, solve the problem. Then, write the code.",
     "Automation is cost-cutting by tightening the corners and not cutting them.",
-    "Hardware eventually fails. Software eventually works."
+    "Hardware eventually fails. Software eventually works.",
+    "Deployment is like a joke, if you have to explain it, it is bad."
 ]
 
 @app.route('/')
