@@ -6,6 +6,7 @@ pipeline {
     }
 
     stages {
+        // שלב הבנייה - רץ תמיד
         stage('Build') {
             steps {
                 echo "Building Docker Image..."
@@ -13,11 +14,23 @@ pipeline {
             }
         }
 
+        // שלב הבדיקות - רץ תמיד
         stage('Test') {
             steps {
                 echo "Running Unit Tests..."
-                // הרצת קונטיינר זמני שמריץ את הפקודה pytest ונסגר מיד
                 sh 'docker run --rm ${IMAGE_NAME}:${BUILD_NUMBER} pytest'
+            }
+        }
+
+        // שלב ההפצה - רץ רק ב-Main!
+        stage('Deploy to Production') {
+            when {
+                branch 'main'
+            }
+            steps {
+                echo "Deploying to Production Server..."
+                echo "This step only runs on MAIN branch!"
+                // בשלבים הבאים נכניס פה את הלוגיקה האמיתית
             }
         }
     }
@@ -25,7 +38,6 @@ pipeline {
     post {
         always {
             echo 'Cleaning up...'
-            // מחיקת האימג' בסוף הריצה (בין אם הצליח ובין אם נכשל)
             sh 'docker rmi ${IMAGE_NAME}:${BUILD_NUMBER} || true'
         }
     }
