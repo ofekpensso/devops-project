@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         // החלף בשם המשתמש שלך
-        DOCKER_USER = "ofekpenso" 
+        DOCKER_USER = "ofekpensso" 
         IMAGE_NAME = "${DOCKER_USER}/wisdom-app"
         DOCKER_CRED_ID = "docker-hub-credentials"
         
